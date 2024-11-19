@@ -46,301 +46,80 @@ To develop a database system that helps to manage Food delivery operations such 
 -  Allow restaurants to manage orders, menus and their delivery riders
 -  Allow rider management to easily allocate and deallocate deliveries based on workload.
 
-## Scope
+## Features
 
-### Customer View
+- User roles: Admin, Manager, Customer, Rider.
+- Manage restaurants and order made by customers.
+- Process Orders and Payments
+- Manage restaurant riders.
 
-- User registration and user profile management
-- Browser restaurants and menus
-- Place and manage orders
-- Secure online payment integration
+## Prerequisites
 
-### Registration View
+Before you begin, ensure you have the following installed:
+1. MySQL Server
+2. MYSQL Workbench
 
-- Create, update and delete menu
-- Customer order management
+## Setup Instructions
 
-### Riders View
+Follow these steps to set up the database:
 
-- Rider registration and profile management
-- Rider assigned orders
+1. Clone the Repository
 
-### Administrator View
+- Clone the project repository to yor local machine:
 
-- Manage customers, restaurants  and riders
-- Generate performance reports
+```bash
+git clone <repository-url>
+cd <repository-folder>
+```
 
+2. Open MySQL Workbench
 
+- Launch MySQL Workbench.
+- Connect to your MySQL Server byu creating or selecting an existing connection.
 
+3. Create the Database
 
+- Open the **_FoodDelivery.sql_** file included in this repository.
+- Execute the following commmand to create the database:
 
-## Requirements Analysis
+```sql
+CREATE DATABASE Delivery;
+USE Delivery;
+```
 
-### Functional Requirements
+4. Import the Schema
 
-CRUD Operations:
+- Copy the SQL script for creating the tabls from the provided file (**__Create_Table_Scripts.sql__**)
+-Paste it into the SQL editor in Workbench.
+-Run the script to create all tables.
 
-- **Customer Operations**:
-  1. Browse menus
-  2. Place orders 
-  3. Cancel orders
+5. Insert Values in to the tables
 
-- **Restaurant**: 
-  1. Add, update  and delete menu items
-  2. Set item availability and pricing
-  3. Set received orders as 'In progress' or 'Delivery in Progress'
-  4. Assign rider order for delivery
+To test the database with populated data:
+- Execute the SQL script with sample data included in the file. (**__Insert_Values_Scripts.sql__**)
+- The execution will populate data for all the tables created previously.
 
+6. Backup and Export 
 
-- **Administrator**:
+To back up your database:
 
-  1. Add,update or remove customers, restaurants and riders
-  2. Generate reports on sales
+- In MySQL Workbench, navigate to **__Server > Data Export__**
 
-### Non-Functional Requirements
 
-  -  The system should be scalable to allow for growth in customers, riders and restaurants
-  -  Implement role based access to protect sensitive data.
-  -  Ensure minimal latency.
+## Considerations
 
+- If you have another MySQL version running, such as XAMPP, you may encounter port conflicts. By default:
 
+  - MySQL Workbench uses port **__3306__**.
+  - XAMPP also uses port 3306 for its MySQL server.
 
-  
+  ### To resolve this:
+  1. Modify the XAMPP MySQL configuration to use port 3307 instead:
+    - Open the **_my.ini_** file located in the XAMPP installation folder (**__\xampp\mysql\bin\my.ini__**).
+    - Update the port configuration:
+    ```ini
+    port = 3307
+    ```
+    - Restart the XAMPP MySQL service.
 
-
-## Database Design
-
-### ER Diagram
-
-Show entities, attributes, and relationships between entities.
-
-
-
-### Schema Diagram
-
-
-
-### Data Dictionary
-
-#### Users
-
-
-| Column Name   | Data Type     | Constraints                               |
-|---------------|---------------|------------------------------------------|
-| User_id       | INT           | PRIMARY KEY, AUTO_INCREMENT              |
-| Role          | ENUM          | NOT NULL (admin/ manager/ customer/ rider) |
-| Phone_Number  | VARCHAR(100)  | NOT NULL                                 |
-| Password       | VARCHAR(100)           | NOT NULL              |
-
-
-#### Customers
-
-
-| Column Name   | Data Type     | Constraints                              |
-|---------------|---------------|------------------------------------------|
-| Customer_id   | INT           | PRIMARY KEY, AUTO_INCREMENT |
-| Name          | VARCHAR(255)| NOT NULL|
-| Phone_Number   | VARCHAR(100)| NOT NULL|
-| Email| VARCHAR(255)  | UNIQUE|
-| Location| VARCHAR(100)  | NOT NULL|
-
-
-#### Restaurants
-
-
-| Column Name   | Data Type     | Constraints                               |
-|---------------|---------------|------------------------------------------|
-| Restaurant_id | INT | PRIMARY KEY, AUTO_INCREMENT|
-| Menu_id          | INT | FOREIGN KEY REFERENCES Menu(Menu_id)|
-| Name          | VARCHAR(255)  | NOT NULL  |
-| Phone_Number  | VARCHAR(100)  | NOT NULL|
-| Email       | VARCHAR(255)| UNIQUE|
-| Location | VARCHAR(100)  | NOT NULL|
-
-
-#### Menu
-
-
-| Column Name   | Data Type     | Constraints                               |
-|---------------|---------------|------------------------------------------|
-| Menu_id       | INT           | PRIMARY KEY, AUTO_INCREMENT              |
-| Name          | VARCHAR(100)  | NOT NULL|
-| Description | LONG TEXT| NOT NULL |
-
-
-
-
-#### Menu_items
-
-| Column Name   | Data Type     | Constraints                               |
-|---------------|---------------|------------------------------------------|
-| Item_id       | INT           | PRIMARY KEY, AUTO_INCREMENT              |
-| Menu_id          | INT          | FOREIGN KEY REFERENCES Menu(Menu_id) |
-| Food_Name   | VARCHAR(100)           | NOT NULL              |
-| Food_Category          | ENUM  | NOT NULL(starter/main/dessert/beverage)                                |
-| Price  | Decimal(10,2)  | NOT NULL                                 |
-| Quantity       | INT           | NOT NULL              |
-
-
-#### Order
-
-
-| Column Name   | Data Type     | Constraints                               |
-|---------------|---------------|------------------------------------------|
-| Order_id       | INT           | PRIMARY KEY, AUTO_INCREMENT|
-| Customer_id   | INT| FOREIGN KEY REFERENCES Customers(Customer_id)|
-| Restaurant_id| INT| FOREIGN KEY REFERENCES Customers(Customer_id)|
-| Total_Price| Decimal(10,2) | NOT NULL |
-
-
-#### Riders
-
-
-| Column Name   | Data Type     | Constraints                               |
-|---------------|---------------|------------------------------------------|
-| Rider_id       | INT           | PRIMARY KEY, AUTO_INCREMENT|
-| Name| INT | FOREIGN KEY REFERENCES Customers(Customer_id)|
-| Phone_Number   | INT           | FOREIGN KEY REFERENCES Restaurants(Restaurant_id)|
-| Email | VARCHAR(255) | NOT NULL                                 |
-| Vehicle_Type| VARCHAR(100)  | NOT NULL                                 |
-| Vehicle_Registration| VARCHAR(100)| NOT NULL|
-| Restaurant_id     | INT| FOREIGN KEY REFERENCES Restaurant(Restaurant_id)|
-
-#### Riders
-
-
-| Column Name   | Data Type     | Constraints                               |
-|---------------|---------------|------------------------------------------|
-| Payment_id       | INT| PRIMARY KEY, AUTO_INCREMENT|
-| Order_id   | INT           | FOREIGN KEY REFERENCES Orders(Order_id)|
-| Payment_Method  | ENUM| NOT NULL (card/cash/mpesa)|
-| Payment_Status| ENUM | DEFAULT 'Pending' |
-
-
-### Table Scripts
-
-**Table Creation Scripts:**
-
--- Create Customers Table
-CREATE TABLE Customers (
-    Customer_id INT PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(255) NOT NULL,
-    Phone_Number VARCHAR(100) NOT NULL,
-    Email VARCHAR(255) UNIQUE,
-    Location VARCHAR(100) NOT NULL
-);
-
--- Create Menu Table (Categorization Table)
-CREATE TABLE Menu (
-    Menu_id INT PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(100) NOT NULL, -- Name of the menu (e.g., "Breakfast Menu", "Dinner Menu")
-    Description VARCHAR(255) -- Optional description of the menu
-);
-
--- Create Menu_Items Table (Specific Items for Each Menu)
-CREATE TABLE Menu_Items (
-    Item_id INT PRIMARY KEY AUTO_INCREMENT,
-    Menu_id INT,
-    Food_Name VARCHAR(100) NOT NULL,
-    Food_Category ENUM('starter', 'main', 'dessert', 'beverage') NOT NULL,
-    Price DECIMAL(10, 2) NOT NULL,
-    Quantity INT NOT NULL,
-    FOREIGN KEY (Menu_id) REFERENCES Menu(Menu_id) ON DELETE CASCADE
-);
-
--- Create Restaurants Table
-CREATE TABLE Restaurants (
-    Restaurant_id INT PRIMARY KEY AUTO_INCREMENT,
-    Menu_id INT,
-    Name VARCHAR(255) NOT NULL,
-    Phone_Number VARCHAR(100) NOT NULL,
-    Email VARCHAR(255) UNIQUE,
-    Location VARCHAR(100) NOT NULL,
-    FOREIGN KEY (Menu_id) REFERENCES Menu(Menu_id)
-);
-
--- Create Orders Table
-CREATE TABLE Orders (
-    Order_id INT PRIMARY KEY AUTO_INCREMENT,
-    Customer_id INT,
-    Restaurant_id INT,
-    Total_Price DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (Customer_id) REFERENCES Customers(Customer_id),
-    FOREIGN KEY (Restaurant_id) REFERENCES Restaurants(Restaurant_id)
-);
-
--- Create Riders Table
-CREATE TABLE Riders (
-    Rider_id INT PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(255) NOT NULL,
-    Phone_Number VARCHAR(100) NOT NULL,
-    Email VARCHAR(255) UNIQUE,
-    Vehicle_Type VARCHAR(100) NOT NULL,
-    Vehicle_Registration VARCHAR(100) NOT NULL,
-    Restaurant_id INT,
-    FOREIGN KEY (Restaurant_id) REFERENCES Restaurants(Restaurant_id)
-);
-
-** Sample Data Scripts: **
-
--- Insert Customers
-INSERT INTO Customers (Customer_id, Name, Phone_Number, Email, Location) VALUES
-(1, 'Wanjiru', '0701-123-456', 'wanjiru@gmail.com', 'Nairobi CBD'),
-(2, 'Otieno', '0722-234-567', 'otieno@yahoo.com', 'Kisumu West'),
-(3, 'Mwangi', '0733-345-678', 'mwangi@outlook.com', 'Thika Town'),
-(4, 'Achieng', '0744-456-789', 'achieng@hotmail.com', 'Mombasa Old Town'),
-(5, 'Mutua', '0755-567-890', 'mutua@kenya.com', 'Machakos Center'),
-(6, 'Njenga', '0766-678-901', 'njenga@africaonline.co.ke', 'Karen Estate'),
-(7, 'Wambui', '0777-789-012', 'wambui@kmail.co.ke', 'Westlands, Nairobi'),
-(8, 'Omwoyo', '0788-890-123', 'omwoyo@kenyamail.com', 'Kisii Town'),
-(9, 'Kibet', '0799-901-234', 'kibet@rmail.co.ke', 'Eldoret Central'),
-(10, 'Njeri', '0708-012-345', 'njeri@kenyalink.com', 'Nyeri Town');
-
--- Insert menu values
-INSERT INTO Menu (Menu_id, Name, Description)
-VALUES
-(1, 'The Hungry Bear Breakfast Menu', 'A delicious breakfast menu with international and local options.'),
-(2, 'Pasta Palace Lunch Menu', 'A selection of fresh pastas and sauces for a perfect midday meal.'),
-(3, 'Sizzling Grill BBQ Menu', 'A selection of meats and BBQ items grilled to perfection.');
-
--- Insert restaurant values
-INSERT INTO Restaurants (Menu_id, Name, Phone_Number, Email, Location)
-VALUES
-(2, 'The Hungry Bear', '123-456-7890', 'contact@hungrybear.com', 'Nairobi, Kenya'),
-(3, 'Pasta Palace', '321-654-9870', 'contact@pastapalace.com', 'Mombasa, Kenya'),
-(4, 'Sizzling Grill', '456-789-1230', 'contact@sizzlinggrill.com', 'Kisumu, Kenya');
-
--- Insert sample menu items
-INSERT INTO Menu_Items (Menu_id, Food_Name, Food_Category, Price, Quantity)
-VALUES
-(1, 'Nyama Choma', 'main', 800.00, 100), 
-(1, 'Sukuma', 'main', 150.00, 150),
-(1, 'Chapati', 'main', 120.00, 200); 
-
-INSERT INTO Restaurants (Menu_id, Name, Phone_Number, Email, Location) VALUES
-(1, 'The Hungry Bear', '+254701234567', 'info@hungrybear.co.ke', 'Westlands, Nairobi'),
-(2, 'Pasta Palace', '+254702345678', 'contact@pastapalace.co.ke', 'Karen, Nairobi'),
-(1, 'Sizzling Grill', '+254703456789', 'support@sizzlinggrill.co.ke', 'Nyali, Mombasa'),
-(1, 'The Rusty Spoon', '+254704567890', 'therustyspoon@ke.co', 'Kisumu CBD, Kisumu'),
-(1, 'Mama's Kitchen', '+254705678901', 'hello@mamas.co.ke', 'Thika Road, Nairobi'),
-(2, 'Lakeview Lounge', '+254706789012', 'reservations@lakeview.co.ke', 'Naivasha Town, Naivasha'),
-(1, 'Coastal Delights', '+254707890123', 'coastaldelights@ke.co', 'Diani Beach, Kwale'),
-(1, 'Savanna Bites', '+254708901234', 'info@savannabites.co.ke', 'Eldoret CBD, Eldoret'),
-(1, 'Urban Spice', '+254709012345', 'urban@spice.ke', 'Langata, Nairobi'),
-(1, 'The Garden Grill', '+254701987654', 'grill@garden.co.ke', 'Ruiru, Kiambu');
-
-
-
-
-
-## Security Measures
-
-- Authentication:Users log in with a unique username and a strong password that meets security standards i.e minimum length and inclusion of special characters.
-- Authorization: Implementing a role based access control to ensure only authorized parties access certain parts of the database.
-- Admin: Full access to all tables and actions (CRUD operations, adding/removing users, and backups).
-- Manager: Limited access to data related to their responsibility (e.g., viewing/editing records but not deleting).
-- Customer/Rider: Restricted to their personal data, such as viewing their orders or profiles.
-- Encryption: Sensitive and personal data is encrypted using secure algorithms.
-- Passwords: Stored using a secure hashing algorithm like bcrypt or Argon2. 
-- Personal Information: Personal fields like email, phone numbers, and addresses are encrypted using SHA-256 encryption.
-- Backup and Recovery: Regular backups to be carried incase system crashes ensuring easy recovery.
+  2. Ensure Workbench remains on port **_3306_** for compatibiility.
