@@ -7,26 +7,26 @@
 ## Table of Contents
 
 
-- [Project Overview](#project-overview)
-- [Objectives](#objectives)
-  - [General Objectives](#general-objectives)
-  - [Specific Objectives](#specific-objectives)
-- [Scope](#scope)
-  - [Customer View](#customer-view)
-  - [Restaurant View](#restaurant-view)
-  - [Riders View](#riders-view)
-  - [Administrator View](#administrator-view)
-- [Requirements Analysis](#requirements-analysis)
-  - [Functional Requirements](#functional-requirements)
-  - [Non-Functional Requirements](#non-functional-requirements)
-- [Database Design](#database-design)
-  - [ER Diagram](#er-diagram)
-  - [Schema Diagram](#schema-diagram)
-  - [Data Dictionary](#data-dictionary)
-  - [Table Scripts](#table-scripts)
-- [Security Measures](#security-measures)
-- [Conclusion and Future Enhancements](#conclusion-and-future-enhancements)
-- [Appendix](#appendix)
+1. [Project Overview](#project-overview)
+2. [Objectives](#objectives)
+   - [General Objectives](#general-objectives)
+   - [Specific Objectives](#specific-objectives)
+3. [Features](#features)
+4. [Prerequisites](#prerequisites)
+5. [Setup Instructions](#setup-instructions)
+   1. [Clone the Repository](#clone-the-repository)
+   2. [Open MySQL Workbench](#open-mysql-workbench)
+   3. [Create the Database](#create-the-database)
+   4. [Import the Schema](#import-the-schema)
+   5. [Insert Values into the Tables](#insert-values-into-the-tables)
+   6. [Backup and Export](#backup-and-export)
+6. [Considerations](#considerations)
+   - [Resolving Port Conflicts](#resolving-port-conflicts)
+7. [Sample Scripts](#sample-scripts)
+   - [Add a New Order](#add-a-new-order)
+   - [Update Payment Status](#update-payment-status)
+   - [Delete a Restaurant Record](#delete-a-restaurant-record)
+
 
 
 ## Project Overview
@@ -50,7 +50,7 @@ To develop a database system that helps to manage Food delivery operations such 
 
 - User roles: Admin, Manager, Customer, Rider.
 - Manage restaurants and order made by customers.
-- Process Orders and Payments
+- Process Orders and Paymentsa
 - Manage restaurant riders.
 
 ## Prerequisites
@@ -123,3 +123,34 @@ To back up your database:
     - Restart the XAMPP MySQL service.
 
   2. Ensure Workbench remains on port **_3306_** for compatibiility.
+
+
+  ## Sample Scripts
+
+  - Add a New Order:
+
+  ```sql
+  -- Insert Sample Data into Orders Table
+  INSERT INTO Orders (Customer_id, Restaurant_id, Total_Price) VALUES
+  (1, 1, 1000.00),
+  (2, 2, 850.00),
+  (3, 1, 950.00);
+  ```
+
+## Conclusion 
+
+### Summary
+
+The Food Delivery Management System (FDMS) provides an efficient database solution tailored to the needs of the food delivery industry. By streamlining the management of orders, restaurants, and delivery riders, the system ensures seamless communication between all stakeholders. This project has highlighted the importance of optimizing food delivery processes and demonstrated the potential of database-driven solutions to improve accuracy, reduce errors, and enhance operational efficiency.
+
+## Licenses
+
+This project is licensed under the **MIT License**. You are free to use, modify, and distribute this software, provided that proper credit is given to the original author(s). 
+
+## Contributors
+
+We appreciate the efforts of the following contributors who made this project possible:
+
+- [@nzommmo](https://github.com/nzommmo)
+- [@eugine-kelly](https://github.com/eugine-kelly)
+- [@lewis-andy](https://github.com/lewis-andy)
