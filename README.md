@@ -9,23 +9,15 @@
 
 1. [Project Overview](#project-overview)
 2. [Objectives](#objectives)
-   - [General Objectives](#general-objectives)
-   - [Specific Objectives](#specific-objectives)
 3. [Features](#features)
 4. [Prerequisites](#prerequisites)
 5. [Setup Instructions](#setup-instructions)
-   1. [Clone the Repository](#clone-the-repository)
-   2. [Open MySQL Workbench](#open-mysql-workbench)
-   3. [Create the Database](#create-the-database)
-   4. [Import the Schema](#import-the-schema)
-   5. [Insert Values into the Tables](#insert-values-into-the-tables)
-   6. [Backup and Export](#backup-and-export)
 6. [Considerations](#considerations)
-   - [Resolving Port Conflicts](#resolving-port-conflicts)
 7. [Sample Scripts](#sample-scripts)
-   - [Add a New Order](#add-a-new-order)
-   - [Update Payment Status](#update-payment-status)
-   - [Delete a Restaurant Record](#delete-a-restaurant-record)
+8. [Conclusion](#conclusion)
+9. [Contributors](#contributors)
+
+   
 
 
 
