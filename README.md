@@ -139,10 +139,3 @@ The Food Delivery Management System (FDMS) provides an efficient database soluti
 
 This project is licensed under the **MIT License**. You are free to use, modify, and distribute this software, provided that proper credit is given to the original author(s). 
 
-## Contributors
-
-We appreciate the efforts of the following contributors who made this project possible:
-
-- [@nzommmo](https://github.com/nzommmo)
-- [@eugine-kelly](https://github.com/eugine-kelly)
-- [@lewis-andy](https://github.com/lewis-andy)
