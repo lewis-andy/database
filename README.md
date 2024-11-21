@@ -29,20 +29,20 @@ Food Delivery Management System (FDMS) is a database solution designed to optimi
 
 ### General Objectives
 
-To develop a database system that helps to manage Food delivery operations such as restaurant details order placement, payment details, menu options and rider details.
+To develop a database system that helps to manage Food delivery operations such as restaurant details order placement, payment details, menu options, and rider details.
 
 
 ### Specific Objectives
 
 - Allow customers to efficiently track orders from placement to delivery.
--  Allow restaurants to manage orders, menus and their delivery riders
+-  Allow restaurants to manage orders, menus, and their delivery riders
 -  Allow rider management to easily allocate and deallocate deliveries based on workload.
 
 ## Features
 
 - User roles: Admin, Manager, Customer, Rider.
-- Manage restaurants and order made by customers.
-- Process Orders and Paymentsa
+- Manage restaurants and orders made by customers.
+- Process Orders and Payments
 - Manage restaurant riders.
 
 ## Prerequisites
@@ -57,7 +57,7 @@ Follow these steps to set up the database:
 
 1. Clone the Repository
 
-- Clone the project repository to yor local machine:
+- Clone the project repository to your local machine:
 
 ```bash
 git clone <repository-url>
@@ -67,12 +67,12 @@ cd <repository-folder>
 2. Open MySQL Workbench
 
 - Launch MySQL Workbench.
-- Connect to your MySQL Server byu creating or selecting an existing connection.
+- Connect to your MySQL Server by creating or selecting an existing connection.
 
 3. Create the Database
 
 - Open the **_FoodDelivery.sql_** file included in this repository.
-- Execute the following commmand to create the database:
+- Execute the following command to create the database:
 
 ```sql
 CREATE DATABASE Delivery;
@@ -81,11 +81,11 @@ USE Delivery;
 
 4. Import the Schema
 
-- Copy the SQL script for creating the tabls from the provided file (**__Create_Table_Scripts.sql__**)
+- Copy the SQL script for creating the tables from the provided file (**__Create_Table_Scripts.sql__**)
 -Paste it into the SQL editor in Workbench.
 -Run the script to create all tables.
 
-5. Insert Values in to the tables
+5. Insert Values into the tables
 
 To test the database with populated data:
 - Execute the SQL script with sample data included in the file. (**__Insert_Values_Scripts.sql__**)
