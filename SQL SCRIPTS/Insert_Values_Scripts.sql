@@ -1,3 +1,10 @@
+-- Insert Sample Data into Users Table
+INSERT INTO Users (Role, Phone_Number, Password) VALUES
+('admin', '0723123456', 'adminpassword'),
+('manager', '0712345678', 'managerpassword'),
+('customer', '0703456789', 'customerpassword'),
+('rider', '0798765432', 'riderpassword');
+
 -- Insert Customers
 INSERT INTO Customers (Customer_id, Name, Phone_Number, Email, Location) VALUES
 (1, 'Wanjiru', '0701-123-456', 'wanjiru@gmail.com', 'Nairobi CBD'),
