@@ -1,3 +1,5 @@
+-- Table population with data
+
 -- Insert Sample Data into Users Table
 INSERT INTO Users (Role, Phone_Number, Password) VALUES
 ('admin', '0723123456', 'adminpassword'),
@@ -5,42 +7,57 @@ INSERT INTO Users (Role, Phone_Number, Password) VALUES
 ('customer', '0703456789', 'customerpassword'),
 ('rider', '0798765432', 'riderpassword');
 
--- Insert Customers
-INSERT INTO Customers (Customer_id, Name, Phone_Number, Email, Location) VALUES
-(1, 'Wanjiru', '0701-123-456', 'wanjiru@gmail.com', 'Nairobi CBD'),
-(2, 'Otieno', '0722-234-567', 'otieno@yahoo.com', 'Kisumu West'),
-(3, 'Mwangi', '0733-345-678', 'mwangi@outlook.com', 'Thika Town'),
-(4, 'Achieng', '0744-456-789', 'achieng@hotmail.com', 'Mombasa Old Town'),
-(5, 'Mutua', '0755-567-890', 'mutua@kenya.com', 'Machakos Center'),
-(6, 'Njenga', '0766-678-901', 'njenga@africaonline.co.ke', 'Karen Estate'),
-(7, 'Wambui', '0777-789-012', 'wambui@kmail.co.ke', 'Westlands, Nairobi'),
-(8, 'Omwoyo', '0788-890-123', 'omwoyo@kenyamail.com', 'Kisii Town'),
-(9, 'Kibet', '0799-901-234', 'kibet@rmail.co.ke', 'Eldoret Central'),
-(10, 'Njeri', '0708-012-345', 'njeri@kenyalink.com', 'Nyeri Town');
+-- Insert Sample Data into Customers Table
+INSERT INTO Customers (Name, Phone_Number, Email, Location) VALUES
+('John Mwangi', '0703456789', 'johnmwangi@email.com', 'Nairobi, Kenyatta Avenue'),
+('Mary Wambui', '0721234567', 'marywambui@email.com', 'Nakuru, Kenyatta Street'),
+('Peter Njoroge', '0732123456', 'peternjoroge@email.com', 'Mombasa, Moi Avenue');
 
--- Insert menu values
-INSERT INTO Menu (Menu_id, Name, Description)
-VALUES
-(1, 'The Hungry Bear Breakfast Menu', 'A delicious breakfast menu with international and local options.'),
-(2, 'Pasta Palace Lunch Menu', 'A selection of fresh pastas and sauces for a perfect midday meal.'),
-(3, 'Sizzling Grill BBQ Menu', 'A selection of meats and BBQ items grilled to perfection.');
+-- Insert Sample Data into Menu Table
+INSERT INTO Menu (Name, Description) VALUES
+('Kenyan Delights', 'A variety of local Kenyan dishes including Nyama Choma, Ugali, Sukuma, and more.'),
+('Fast Food', 'A menu of quick and tasty options including Burgers, Fries, and Soft Drinks.');
 
--- Insert restaurant values
-INSERT INTO Restaurants (Menu_id, Name, Phone_Number, Email, Location)
-VALUES
-(2, 'The Hungry Bear', '123-456-7890', 'contact@hungrybear.com', 'Nairobi, Kenya'),
-(3, 'Pasta Palace', '321-654-9870', 'contact@pastapalace.com', 'Mombasa, Kenya'),
-(4, 'Sizzling Grill', '456-789-1230', 'contact@sizzlinggrill.com', 'Kisumu, Kenya');
-
--- Insert sample menu items
-INSERT INTO Menu_Items (Menu_id, Food_Name, Food_Category, Price, Quantity)
-VALUES
-(1, 'Nyama Choma', 'main', 800.00, 100), 
-(1, 'Sukuma', 'main', 150.00, 150),
-(1, 'Chapati', 'main', 120.00, 200); 
-
+-- Insert Sample Data into Restaurants Table
 INSERT INTO Restaurants (Menu_id, Name, Phone_Number, Email, Location) VALUES
-(1, 'The Hungry Bear', '+254701234567', 'info@hungrybear.co.ke', 'Westlands, Nairobi'),
-(2, 'Pasta Palace', '+254702345678', 'contact@pastapalace.co.ke', 'Karen, Nairobi'),
-(1, 'Sizzling Grill', '+254703456789', 'support@sizzlinggrill.co.ke', 'Nyali, Mombasa'),
-(1, 'The Rusty Spoon', '+254704567890', 'therustyspoon@ke.co', 'Kisumu CBD, Kisumu');
+(1, 'Mama Njoki’s Kitchen', '0701234567', 'mamanjoki@email.com', 'Nairobi, Kenyatta Avenue'),
+(2, 'Quick Bites', '0731234567', 'quickbites@email.com', 'Mombasa, Moi Avenue');
+
+-- Insert Sample Data into Menu_Items Table (Corrected)
+INSERT INTO Menu_Items (Menu_id, Food_Name, Food_Category, Price, Quantity) VALUES
+(1, 'Nyama Choma', 'main', 800.00, 50),
+(1, 'Ugali', 'main', 100.00, 100),  -- 'main' is appropriate for Ugali
+(1, 'Sukuma Wiki', 'main', 50.00, 100),  -- 'main' is appropriate for Sukuma Wiki
+(2, 'Cheese Burger', 'main', 500.00, 30),
+(2, 'French Fries', 'starter', 200.00, 50),  -- Changed to 'starter'
+(2, 'Coca Cola', 'beverage', 150.00, 100);  -- 'beverage' is appropriate for Coca Cola
+
+
+-- Insert Sample Data into Orders Table
+INSERT INTO Orders (Customer_id, Restaurant_id, Total_Price) VALUES
+(1, 1, 1000.00),
+(2, 2, 850.00),
+(3, 1, 950.00);
+
+-- Insert Sample Data into Order_Items Table
+INSERT INTO Order_Items (Order_id, Item_id, Quantity) VALUES
+(1, 1, 1), -- Nyama Choma
+(1, 2, 2), -- Ugali
+(2, 3, 1), -- Sukuma
+(2, 4, 1), -- Cheese Burger
+(2, 5, 2), -- French Fries
+(3, 6, 1), -- Nyama Choma
+(3, 1, 1); -- Coca Cola
+
+
+
+-- Insert Sample Data into Riders Table
+INSERT INTO Riders (User_id, Name, Phone_Number, Email, Vehicle_Type, Vehicle_Registration, Assigned_Restaurant_id) VALUES
+(4, 'James Kariuki', '0798765432', 'jameskariuki@email.com', 'Motorbike', 'KBD123L', 1),
+(4, 'Wanjiru Mwangi', '0787654321', 'wanjirumwangi@email.com', 'Car', 'KBB234M', 2);
+
+-- Insert Sample Data into Payments Table
+INSERT INTO Payments (Order_id, Payment_Method, Payment_Status) VALUES
+(1, 'cash', 'Completed'),
+(2, 'mpesa', 'Pending'),
+(3, 'card', 'Completed');
