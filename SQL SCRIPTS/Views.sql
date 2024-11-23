@@ -1,5 +1,5 @@
+-- Views 
 --  CustomerOrder View helps show all the orders a customer has made.
-
 
 CREATE VIEW CustomerOrders AS
 SELECT o.Order_id, o.Total_Price, c.Name, c.Email
@@ -46,4 +46,26 @@ JOIN
 JOIN 
     Customers c ON o.Customer_id = c.Customer_id
 JOIN 
-    Restaurants res ON o.Restaurant_id = res.Restaurant_id;
+    Restaurants res ON o.Restaurant_id = res.Restaurant_id; 
+    
+    -- Creates a view with customer order details including the order items 
+CREATE VIEW CustomerOrderDetails AS
+SELECT 
+    c.Name AS CustomerName,
+    c.Email AS CustomerEmail,
+    mi.Food_Name,
+	COUNT(DISTINCT o.Order_id) AS TotalOrders,
+    oi.Quantity * mi.Price AS Subtotal
+
+FROM 
+    Customers c
+JOIN 
+    Orders o ON c.Customer_id = o.Customer_id
+JOIN 
+    Order_Items oi ON o.Order_id = oi.Order_id
+JOIN 
+    Menu_Items mi ON oi.Item_id = mi.Item_id
+GROUP BY
+	c.Customer_id, c.Name, c.Email
+ORDER BY 
+    c.Name, o.Order_id;
